@@ -9,5 +9,6 @@ var router = express.Router();
  * Get all users
  */
 router.get('/', userController.index);
+router.post('/', userController.store);
 
 module.exports = router;

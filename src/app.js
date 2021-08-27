@@ -1,3 +1,5 @@
+import './bootstrap';
+
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
@@ -6,6 +8,7 @@ import logger from 'morgan';
 
 import routerIndex from './routes/index';
 import usersRoute from './routes/v1/users';
+
 
 var app = express();
 
