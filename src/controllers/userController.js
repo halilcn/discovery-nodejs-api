@@ -1,4 +1,5 @@
 import User from "../models/user";
+import createError from 'http-errors'
 
 /**
  * Get all users
@@ -8,7 +9,7 @@ exports.index = async (req, res, next) => {
         const users = await User.find();
         res.json(users)
     } catch (err) {
-        //next(error); ??
+        next(err);
     }
 }
 
@@ -18,10 +19,9 @@ exports.index = async (req, res, next) => {
 exports.store = async (req, res, next) => {
     try {
         await new User(req.body).save()
-        res.sendStatus(201);  //??
+        res.sendStatus(201);
     } catch (err) {
-        res.sendStatus(404);
-        //next(error); ??
+        next(err);
     }
 }
 
