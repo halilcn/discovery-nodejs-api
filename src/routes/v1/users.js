@@ -6,8 +6,9 @@ var router = express.Router();
 //router.use(() => {}); // General middleware
 
 router.get('/', userController.index);
+router.post('/', userController.store);
 router.get('/:userId', userController.show);
 router.put('/:userId', userController.update);
-router.post('/', userController.store);
+router.delete('/:userId', userController.destroy);
 
 module.exports = router;

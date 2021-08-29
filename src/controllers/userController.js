@@ -1,5 +1,4 @@
 import User from "../models/user";
-import {json} from "express";
 
 /**
  * Get all users
@@ -21,6 +20,7 @@ exports.store = async (req, res, next) => {
         await new User(req.body).save()
         res.sendStatus(201);  //??
     } catch (err) {
+        res.sendStatus(404);
         //next(error); ??
     }
 }
@@ -30,7 +30,7 @@ exports.store = async (req, res, next) => {
  */
 exports.show = async (req, res, next) => {
     try {
-        const user = await User.findOne({_id: req.params.userId});
+        const user = await User.findById(req.params.userId);
         res.json(user);
     } catch (err) {
         //next(error); ??
@@ -42,9 +42,19 @@ exports.show = async (req, res, next) => {
  */
 exports.update = async (req, res, next) => {
     try {
+        await User.findByIdAndUpdate(req.params.userId, req.body);
         res.sendStatus(200);
+    } catch (err) {
+        //next(error); ??
+    }
+}
 
-       // await User.findOneAndUpdate({_id: req.params.userId}, req.params);
+/**
+ * Delete user
+ */
+exports.destroy = async (req, res, next) => {
+    try {
+        await User.findByIdAndDelete(req.params.userId);
         res.sendStatus(200);
     } catch (err) {
         //next(error); ??

@@ -8,6 +8,7 @@ import logger from 'morgan';
 
 import routerIndex from './routes/index';
 import usersRoute from './routes/v1/users';
+import familiesRoute from './routes/v1/families';
 
 
 var app = express();
@@ -18,8 +19,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
 
-
 app.use('/api/v1/users', usersRoute);
+app.use('/api/v1/families', familiesRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -31,6 +32,8 @@ app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    console.log(err.message);
 
     // render the error page
     res.status(err.status || 500);
