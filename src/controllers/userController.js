@@ -1,9 +1,5 @@
 import User from "../models/user";
 import createError from 'http-errors'
-import {ignoreRoot} from "nodemon/lib/config/defaults";
-const { body, validationResult } = require('express-validator');
-
-
 
 /**
  * Get all users
@@ -22,12 +18,6 @@ exports.index = async (req, res, next) => {
  */
 exports.store = async (req, res, next) => {
     try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
-        res.json({ghj:45});
         await new User(req.body).save();
         res.sendStatus(201);
     } catch (err) {
@@ -41,7 +31,7 @@ exports.store = async (req, res, next) => {
 exports.show = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.userId);
-        if (!user) throw createError(204, 'User not found');
+        if (!user) next(new createError(204, 'User not found'));
         res.json(user);
     } catch (err) {
         next(err);
@@ -53,10 +43,11 @@ exports.show = async (req, res, next) => {
  */
 exports.update = async (req, res, next) => {
     try {
-        await User.findByIdAndUpdate(req.params.userId, req.body);
+        const user = await User.findByIdAndUpdate(req.params.userId, req.body);
+        if (!user) next(new createError(404, 'User not found'));
         res.sendStatus(200);
     } catch (err) {
-        //next(error); ??
+        next(err);
     }
 }
 
@@ -65,10 +56,10 @@ exports.update = async (req, res, next) => {
  */
 exports.destroy = async (req, res, next) => {
     try {
-        await User.findByIdAndDelete(req.params.userId);
+        const user = await User.findByIdAndDelete(req.params.userId);
+        if (!user) next(new createError(404, 'User not found'));
         res.sendStatus(200);
     } catch (err) {
-        //next(error); ??
+        next(err);
     }
 }
-
