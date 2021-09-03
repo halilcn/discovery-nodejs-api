@@ -5,6 +5,7 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import helmet from "helmet";
 
 import routerIndex from './routes/index';
 import usersRoute from './routes/v1/users';
@@ -18,6 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
+//Use Helmet
+app.use(helmet());
 
 app.use('/api/v1/users', usersRoute);
 app.use('/api/v1/families', familiesRoute);
