@@ -16,7 +16,11 @@ const User = mongoose.Schema({
         age: {
             type: Number,
             required: true
-        }
+        },
+        families: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Family'
+        }]
     },
     {
         timestamps: true,

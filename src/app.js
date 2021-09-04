@@ -10,6 +10,7 @@ import helmet from "helmet";
 import routerIndex from './routes/index';
 import usersRoute from './routes/v1/users';
 import familiesRoute from './routes/v1/families';
+import familiesUsersRoute from './routes/v1/familiesUsers';
 
 
 var app = express();
@@ -22,8 +23,15 @@ app.use(cookieParser());
 //Use Helmet
 app.use(helmet());
 
+//Todo:Helper class ?
+const bindFamilyId = (req, res, next) => {
+    req.familyId = req.params.familyId;
+    next();
+};
+
 app.use('/api/v1/users', usersRoute);
 app.use('/api/v1/families', familiesRoute);
+app.use('/api/v1/families/:familyId/users', bindFamilyId, familiesUsersRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
