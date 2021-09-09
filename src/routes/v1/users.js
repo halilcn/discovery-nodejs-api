@@ -4,8 +4,6 @@ import storeAndUpdateValidation from "../../validations/userStoreAndUpdateValida
 
 const router = express.Router();
 
-//router.use(() => {}); // General middleware
-
 router.get('/', userController.index);
 router.post('/', storeAndUpdateValidation, userController.store);
 router.get('/:userId', userController.show);
