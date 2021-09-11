@@ -1,11 +1,11 @@
-import mongoose from 'mongoose'
-import config from '../src/config'
+import mongoose from 'mongoose';
+import config from '../src/config';
 
 //Connect Mongoose
 try {
-    mongoose.connect(config.DATABASE.MONGO_CONNECTION);
+  mongoose.connect(config.DATABASE.MONGO_CONNECTION);
 } catch (err) {
-    console.log("Mongoose error:" + err);
+  console.log('Mongoose error:' + err);
 }
 
-module.exports = {mongoose}
+module.exports = { mongoose };

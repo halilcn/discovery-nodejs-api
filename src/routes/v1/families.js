@@ -1,8 +1,8 @@
-import express from "express";
-import * as familyController from "../../controllers/familyController";
-import storeAndUpdateValidation from "../../validations/familyStoreAndUpdateValidation"
+import express from 'express';
+import * as familyController from '../../controllers/familyController';
+import storeAndUpdateValidation from '../../validations/familyStoreAndUpdateValidation';
 
-var router = express.Router();
+const router = express.Router();
 
 //TODO: Permissions
 
