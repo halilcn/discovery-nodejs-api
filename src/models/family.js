@@ -4,7 +4,8 @@ const Family = mongoose.Schema({
     name: {
       type: String,
       uppercase: true,
-      required: true
+      required: true,
+      unique: true
     }
   },
   {

@@ -10,6 +10,6 @@ router.get('/', familyController.index);
 router.post('/', storeAndUpdateValidation, familyController.store);
 router.get('/:familyId', familyController.show);
 router.put('/:familyId', storeAndUpdateValidation, familyController.update);
-router.delete('/:familyId', familyController.update);
+router.delete('/:familyId', familyController.destroy);
 
 module.exports = router;
