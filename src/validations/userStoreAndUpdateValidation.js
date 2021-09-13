@@ -1,15 +1,10 @@
-import { body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
+import helpers from '../helpers';
 
 export default [
   body('name').isString(),
   body('surname').isString(),
   body('age').isNumeric(),
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-
-    next();
-  }
+  body('gender').isString(),
+  helpers.sendIfThereAreErrors
 ];

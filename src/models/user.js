@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import consts from '../consts';
 
 const User = mongoose.Schema({
     name: {
@@ -16,6 +17,11 @@ const User = mongoose.Schema({
     age: {
       type: Number,
       required: true
+    },
+    gender: {
+      type: String,
+      required: true,
+      enum: consts.USER_GENDER_ENUM
     }
   },
   {
