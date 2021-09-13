@@ -1,8 +1,6 @@
 import Role from '../models/role';
 import createError from 'http-errors';
-import User from '../models/user';
-
-//TODO: request ?
+import FamilyUser from '../models/familyUser';
 
 /**
  * Get all roles
@@ -21,7 +19,7 @@ exports.index = async (req, res, next) => {
  */
 exports.store = async (req, res, next) => {
   try {
-    await new Role(req.params).save();
+    await new Role(req.body).save();
     res.sendStatus(201);
   } catch (err) {
     next(err);
@@ -34,7 +32,7 @@ exports.store = async (req, res, next) => {
 exports.show = async (req, res, next) => {
   try {
     const role = await Role.findById(req.params.roleId);
-    if (!role) next(new createError(204, 'Role not found')); //problem !
+    if (!role) return next(new createError(204, 'Role not found'));
     res.json(role);
   } catch (err) {
     next(err);
@@ -47,7 +45,7 @@ exports.show = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     const role = await Role.findByIdAndUpdate(req.params.roleId, req.body);
-    if (!role) next(new createError(404, 'Role not found')); //problem !
+    if (!role) return next(new createError(404, 'Role not found'));
     res.sendStatus(200);
   } catch (err) {
     next(err);
@@ -59,9 +57,11 @@ exports.update = async (req, res, next) => {
  */
 exports.destroy = async (req, res, next) => {
   try {
-    //TODO: eğer familyUser tabloda bu role id si kullanıyorsa silme uyarı ver !
-    const role = await Role.findByIdAndDelete(req.params.roleId);
-    if (!role) next(new createError(404, 'Role not found'));
+    const { roleId } = req.params;
+    const isActiveRole = await FamilyUser.exists({ role: roleId });
+    if (isActiveRole) return next(new createError(409, 'This role is actively '));
+    const role = await Role.findByIdAndDelete(roleId);
+    if (!role) return next(new createError(404, 'Role not found'));
     res.sendStatus(200);
   } catch (err) {
     next(err);

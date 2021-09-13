@@ -1,12 +1,13 @@
 import express from 'express';
 import * as roleController from '../../controllers/roleController';
+import roleStoreAndUpdateValidation from '../../validations/roleStoreAndUpdateValidation';
 
 const router = express.Router();
 
 router.get('/', roleController.index);
-router.post('/', roleController.store);
+router.post('/', roleStoreAndUpdateValidation, roleController.store);
 router.get('/:roleId', roleController.show);
-router.put('/:roleId', roleController.update);
+router.put('/:roleId', roleStoreAndUpdateValidation, roleController.update);
 router.delete('/:roleId', roleController.destroy);
 
 module.exports = router;

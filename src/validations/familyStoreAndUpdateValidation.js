@@ -1,4 +1,4 @@
-import { body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
 import helpers from '../helpers';
 import Family from '../models/family';
 
