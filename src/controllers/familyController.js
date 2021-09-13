@@ -32,13 +32,11 @@ exports.store = async (req, res, next) => {
  */
 exports.show = async (req, res, next) => {
   try {
-    //Todo: Users çekilecek !
     const { familyId } = req.params;
-    let family = await Family.findById(familyId);
-    family['test'] = 'asd';
+    const family = await Family.findById(familyId);
     const users = await FamilyUser.find({ family: familyId });
     if (!family) return next(new createError(204, 'Family not found'));
-    res.json(family);
+    res.json({ family, users });
   } catch (err) {
     next(err);
   }

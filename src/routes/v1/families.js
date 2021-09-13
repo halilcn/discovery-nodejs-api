@@ -4,7 +4,7 @@ import storeAndUpdateValidation from '../../validations/familyStoreAndUpdateVali
 
 const router = express.Router();
 
-//TODO: Permissions
+//TODO: Family's permissions for CRUD
 
 router.get('/', familyController.index);
 router.post('/', storeAndUpdateValidation, familyController.store);
