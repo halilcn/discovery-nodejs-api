@@ -7,10 +7,10 @@ import express from 'express';
 var app = express();
 
 //Import middlewares
-require('../src/middlewares')(app);
+require('./middlewares')(app);
 
 //Import routes
-require('../src/routes')(app);
+require('./routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
