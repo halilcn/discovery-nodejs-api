@@ -6,11 +6,11 @@ import createError from 'http-errors';
  */
 exports.index = async (req, res, next) => {
   try {
-    const familyUser = await FamilyUser
-      .find({}) //TODO: Find ? *console.log(req.familyId);
+    const usersOfFamily = await FamilyUser
+      .find({ family: req.familyId })
       .populate('user', 'name')
-      .populate('family', 'name');
-    res.json(familyUser);
+      .populate('role', 'name');
+    res.json(usersOfFamily);
   } catch (err) {
     next(err);
   }
@@ -21,6 +21,11 @@ exports.index = async (req, res, next) => {
  */
 exports.store = async (req, res, next) => {
   try {
+    const isStoredUserOfFamily = await FamilyUser.exists({
+      user: req.body.user,
+      family: req.familyId
+    });
+    if (isStoredUserOfFamily) return next(createError(409, 'This user already stored in the family'));
     await new FamilyUser({ ...req.body, family: req.familyId }).save();
     res.sendStatus(201);
   } catch (err) {
@@ -31,10 +36,25 @@ exports.store = async (req, res, next) => {
 /**
  *Get user of family
  */
-exports.show = (req, res, next) => {
+exports.show = async (req, res, next) => {
   try {
-    res.send('ok');
+    const userOfFamily = await FamilyUser
+      .find({
+        family: req.familyId,
+        user: req.params.userId
+      })
+      .populate('user', 'name')
+      .populate('role', 'name');
+    if (!userOfFamily) return next(new createError(204, 'User of family not found'));
+    res.send(userOfFamily);
   } catch (err) {
     next(err);
   }
+};
+
+/**
+ * Update user of family
+ */
+exports.update = async (req, res, next) => {
+
 };
