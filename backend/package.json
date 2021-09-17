@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node bin/main.js",
     "start:dev": "nodemon --exec babel-node bin/main.js"
   },
   "dependencies": {
