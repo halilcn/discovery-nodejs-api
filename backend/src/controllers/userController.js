@@ -7,7 +7,7 @@ import createError from 'http-errors';
  */
 exports.index = async (req, res, next) => {
   try {
-    //Todo:Dahil olduğu aileleride response etme? (İç içe relationships)
+    //Todo: Response family
     const users = await User.find();
     res.json(users);
   } catch (err) {
@@ -32,7 +32,7 @@ exports.store = async (req, res, next) => {
  */
 exports.show = async (req, res, next) => {
   try {
-    //Todo:Dahil olduğu aileyi response etme? (İç içe relationships)
+    //Todo: Response family
     const user = await User.findById(req.params.userId);
     if (!user) return next(new createError(204, 'User not found'));
     res.json(user);

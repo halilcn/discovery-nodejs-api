@@ -6,7 +6,7 @@ import express from 'express';
 
 var app = express();
 
-//Import middlewares
+//Import middlewaresResponse family with users
 require('./middlewares')(app);
 
 //Import routes
