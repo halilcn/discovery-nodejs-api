@@ -1,6 +1,6 @@
 import express from 'express';
 import * as roleController from '../../controllers/roleController';
-import roleStoreAndUpdateValidation from '../../validations/roleStoreAndUpdateValidation';
+import roleStoreAndUpdateValidation from '../../validations/storeAndUpdateRoleValidation';
 
 const router = express.Router();
 

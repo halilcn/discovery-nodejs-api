@@ -1,6 +1,6 @@
 import express from 'express';
 import * as familyController from '../../controllers/familyController';
-import storeAndUpdateValidation from '../../validations/familyStoreAndUpdateValidation';
+import storeAndUpdateValidation from '../../validations/storeAndUpdateFamilyValidation';
 
 const router = express.Router();
 

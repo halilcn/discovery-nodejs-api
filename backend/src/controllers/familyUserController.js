@@ -56,5 +56,34 @@ exports.show = async (req, res, next) => {
  * Update user of family
  */
 exports.update = async (req, res, next) => {
+  try {
+    const userOfFamily = await FamilyUser.findOneAndUpdate(
+      {
+        family: req.familyId,
+        user: req.params.userId
+      },
+      {
+        role: req.body.role
+      });
+    if (!userOfFamily) return next(createError(404, 'User of family not found'));
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
+};
 
+/**
+ * Delete user of family
+ */
+exports.destroy = async (req, res, next) => {
+  try {
+    const userOfFamily = await FamilyUser.findOneAndDelete({
+      family: req.familyId,
+      user: req.params.userId
+    });
+    if (!userOfFamily) return next(createError(404, 'User of family not found'));
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 };
