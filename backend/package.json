@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/main.js",
-    "build": "babel -d bin/main.js  dist",
+    "start": "nodemon --exec babel-node bin/main.js",
     "start:dev": "nodemon --exec babel-node bin/main.js"
   },
   "dependencies": {
