@@ -1,39 +1,45 @@
-
 # Discovery Nodejs
 ## API for family and users of family.
 
-
-This project was created to explore API development with node.js. The project has been tried to be coded clean and understandable
-
+This project was created to explore API development with nodejs. The project tried to be coded clean and understandable.
 
 ## Built With
-1. Express (Node.js web application framework)
-2. Mongodb (NoSQL Database)
-3. express-validator (Validator for express)
-4. mongoose (Mongodb object modeling for node.js)
-5. babel (Compiler for JavaScript)
-6. nodemon (devtool for automatically restarting)
+* Express (Node.js web application framework)
+* Mongodb (NoSQL Database)
+* express-validator (Validator for express)
+* mongoose (Mongodb object modeling for node.js)
+* babel (Compiler for JavaScript)
+* nodemon (devtool for automatically restarting)
 
 # Installation
-You can installation with docker or npm. Below you can do it step by step
+The app uses port 3000. Therefore you make sure port 3000 is empty.
+
+You can installation with docker or npm. Below you can do it step by step.
+
+
+
 
 Clone the source code:
 ```
 git clone https://github.com/halilcn/discovery-nodejs-api.git
 ```
+Go to `discovery-nodejs-api` directory when project is cloned.
+
 
 ## Installation with docker
+Running app
+```
+docker compose up -d --build (build gerek var rmı?)
+```
+After the compilation is complete, API ready on ``` https://127.0.0.1:3000/api/v1```. You can refer to the [documentation](#documentation-for-api) to use the api.
 
 ## Installation with npm
 The application uses mongodb for database operations.
-So you must have mongodb installed on your computer and the mongodb must use port 27017. (database'de oluşturmam gerek mi?
+Therefore you must have mongodb installed on your computer and the mongodb must use port 27017.
 
 Database and collections will automatic create on mongodb when the application is started.
 
-
-
-
-Change to the directory
+Change  the directory
 ```
 cd backend
 ```
@@ -45,45 +51,66 @@ Start the app
 ```
 npm run start
 ```
-After installation packages, API ready on http://127.0.0.1:3000/api/v1 You can refer to the documentation to use the api.
-
-
+After installation packages, API ready on ``https://127.0.0.1:3000/api/v1``. You can refer to the [documentation](#documentation-for-api) to use the api.
 
 ## Documentation for API
 
 ### Users
 
-#### Get all users
+* _Get all users_
 
 ```http
   GET /api/v1/users
 ```
-#### Save user
+* _Save user_
 
 ```http
   POST /api/v1/users
 ```
-#### Get user
+| Parameters | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | (**Required**) Name of user
+| `surname`      | `string or integer` | (**Required**) Surname of user
+| `age`      | `string or integer` | (**Required**) Age of user
+| `gender`      | `string` | (**Required**) Gender of user
+
+* _Get user_
 
 ```http
-  POST /api/v1/users/:userId
+  Get /api/v1/users/:userId
 ```
 | Parameters | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `userId`      | `string or integer` | (**Required**) Id of user ()??
+| `userId`      | `integer` | (**Required**) Id of user
 
-#### Öğeyi getir
+* _Update user_
 
 ```http
-  GET /api/items/${id}
+ PUT /api/v1/users/:userId
 ```
 
-| Parametre | Tip     | Açıklama                       |
+| Parameters | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Gerekli**. Çağrılacak öğenin anahtar değeri |
+| `userId`      | `integer` | (**Required**) Id of user
 
-#### add(num1, num2)
+| Parameters | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | (**Required**) Name of user
+| `surname`      | `string or integer` | (**Required**) Surname of user
+| `age`      | `string or integer` | (**Required**) Age of user
+| `gender`      | `string` | (**Required**) Gender of user
 
-İki sayı alır ve toplamı döndürür.
+* _Delete user_
 
-  
+```http
+ DELETE /api/v1/users/:userId
+```
+
+| Parameters | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `userId`      | `integer` | (**Required**) Id of user
+
+
+
+
+_More documents will be added soon..._
