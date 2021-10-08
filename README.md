@@ -2,7 +2,7 @@
 
 ## API for family and users of family.
 
-This project was created to explore API development with nodejs. The project tried to be coded clean and understandable.
+This project was created to explore API development with nodejs. The project tried to be coded clean and understandable, its tests were written.
 
 ## Built With
 
