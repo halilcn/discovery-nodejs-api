@@ -3,19 +3,21 @@ import app from '../src/app';
 import Family from '../src/models/family';
 import faker from 'faker';
 
-const generateLastname = () => {
-  return faker.name.lastName();
+const generateFamily = () => {
+  return {
+    name: faker.name.lastName()
+  };
 };
 
 test('POST /api/v1/families', async () => {
   await supertest(app)
     .post('/api/v1/families')
-    .send({ name: generateLastname() })
+    .send(generateFamily())
     .expect(201);
 });
 
 test('GET /api/v1/families', async () => {
-  await Family.create({ name: generateLastname() });
+  await Family.create(generateFamily());
 
   await supertest(app)
     .get('/api/v1/families')
@@ -23,7 +25,7 @@ test('GET /api/v1/families', async () => {
 });
 
 test('SHOW /api/v1/families/:familyId', async () => {
-  const family = await Family.create({ name: generateLastname() });
+  const family = await Family.create(generateFamily());
 
   await supertest(app)
     .get(`/api/v1/families/${family._id}`)
@@ -31,19 +33,16 @@ test('SHOW /api/v1/families/:familyId', async () => {
 });
 
 test('UPDATE /api/v1/families/:familyId', async () => {
-  const family = await Family.create({ name: generateLastname() });
-  const familyNewData = {
-    name: generateLastname()
-  };
+  const family = await Family.create(generateFamily());
 
   await supertest(app)
     .put(`/api/v1/families/${family._id}`)
-    .send(familyNewData)
+    .send(generateFamily())
     .expect(200);
 });
 
 test('DELETE /api/v1/families/:familyId', async () => {
-  const family = await Family.create({ name: generateLastname() });
+  const family = await Family.create(generateFamily());
 
   await supertest(app)
     .delete(`/api/v1/families/${family._id}`)
