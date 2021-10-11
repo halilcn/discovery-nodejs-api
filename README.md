@@ -12,6 +12,7 @@ This project was created to explore API development with nodejs. The project tri
 * mongoose (Mongodb object modeling for node.js)
 * babel (Compiler for JavaScript)
 * nodemon (For automatically restarting)
+* jest (For API tests)
 
 # Installation
 
